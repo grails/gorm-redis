@@ -1,0 +1,4 @@
+include "grails-datastore-gorm-redis", 'grails-plugin'
+
+// findProject(':boot-plugin').name = 'gorm-cassandra-spring-boot'
+

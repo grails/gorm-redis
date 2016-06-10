@@ -1,0 +1,37 @@
+
+
+dependencyManagement {
+    imports {
+        mavenBom "org.grails:grails-bom:$grailsVersion"
+    }
+    applyMavenExclusions false
+}
+
+
+dependencies {
+
+    provided("org.grails:grails-core")
+    provided("org.grails:grails-bootstrap")
+    compile "org.grails:grails-datastore-simple:$gormVersion"
+    compile "org.grails:grails-datastore-gorm-support:$gormVersion", {
+        exclude group:'org.springframework', module:'spring-context'
+        exclude group:'org.springframework', module:'spring-core'
+        exclude group:'org.springframework', module:'spring-beans'
+        exclude group:'org.springframework', module:'spring-tx'
+        exclude group:'org.grails', module:'grails-bootstrap'
+        exclude group:'org.codehaus.groovy', module:'groovy-all'
+        exclude group:'org.grails', module:'grails-core'
+        exclude group:'javax.transaction', module:'jta'
+    }
+
+    compile project(":grails-datastore-gorm-redis"), {
+        exclude group:'org.springframework', module:'spring-context'
+        exclude group:'org.springframework', module:'spring-core'
+        exclude group:'org.springframework', module:'spring-beans'
+        exclude group:'org.springframework', module:'spring-tx'
+        exclude group:'org.grails', module:'grails-bootstrap'
+        exclude group:'org.codehaus.groovy', module:'groovy-all'
+        exclude group:'org.grails', module:'grails-core'
+        exclude group:'javax.transaction', module:'jta'
+    }
+}

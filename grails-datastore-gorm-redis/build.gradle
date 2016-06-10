@@ -1,0 +1,72 @@
+dependencies {
+
+    compile('redis.clients:jedis:2.7.3')
+    compile "org.grails:grails-datastore-gorm-validation:$gormVersion"
+    compile "org.grails:grails-datastore-gorm:$gormVersion",
+            "org.grails:grails-datastore-web:$gormVersion"
+
+    compile("org.grails:grails-datastore-gorm-support:$gormVersion") {
+        exclude group:'org.grails', module:'grails-datastore-gorm-hibernate-core'
+    }
+
+    testCompile "org.grails:grails-datastore-gorm-tck:$gormVersion"
+    testCompile "org.grails:grails-datastore-gorm-test:$gormVersion"
+
+
+    testRuntime "org.springframework:spring-expression:$springVersion"
+}
+
+test {
+	maxParallelForks = 1
+}
+
+test.doFirst {
+    def toBaseClassRelativePathWithoutExtension = { String base, String classFile ->
+        if (classFile.startsWith(base)) {
+            def sansClass = classFile[0 .. classFile.size() - ".class".size() - 1]
+            def dollarIndex = sansClass.indexOf('$')
+            def baseClass = dollarIndex > 0 ? sansClass[0..dollarIndex - 1] : sansClass
+            def relative = baseClass - base - '/'
+            relative
+        }
+        else {
+            null
+        }
+    }    
+    def tckClassesFile = project
+                            .configurations
+                            .testCompile
+                            .resolvedConfiguration
+                            .getResolvedArtifacts()
+                            .find { resolved ->
+                                resolved.moduleVersion.id.name == 'grails-datastore-gorm-tck'
+                            }.file
+
+    def tckClassesDir = project.file("${project.buildDir}/tck")                            
+    copy {
+        from zipTree(tckClassesFile)
+        into tckClassesDir 
+    }
+    copy {
+        from tckClassesDir
+        into sourceSets.test.output.classesDir
+        include "**/*.class"
+        exclude { details ->
+            // Do not copy across any TCK class (or nested classes of that class)
+            // If there is a corresponding source file in the particular modules
+            // test source tree. Allows a module to override a test/helper.
+
+            if (!details.file.isFile()) {
+                return false
+            }
+            def candidatePath = details.file.absolutePath
+            def relativePath = toBaseClassRelativePathWithoutExtension(tckClassesDir.absolutePath, candidatePath)
+
+            if (relativePath == null) {
+                throw new IllegalStateException("$candidatePath does not appear to be in the TCK")
+            }
+
+            project.file("src/test/groovy/${relativePath}.groovy").exists()
+        }
+    }
+}
