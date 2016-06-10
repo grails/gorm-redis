@@ -302,7 +302,7 @@ class PublishingConvention {
 
         def name = project.name
         if(name.startsWith('grails') && name.endsWith('-plugin')) {
-            name = "gorm-$datastoreName"
+            name = "${datastoreName}-gorm"
         }
         projectArtifactId = name
     }
