@@ -1,0 +1,15 @@
+If you plan to use Redis as your primary datastore then you need to remove the Hibernate plugin definition from `build.gradle`.
+
+[source,groovy]
+----
+compile "org.grails.plugins:hibernate"
+----
+
+With this done all domain classes in grails-app/domain will be persisted via Redis and not Hibernate. You can create a domain class by running the regular `create-domain-class` command:
+
+[source,groovy]
+----
+grails create-domain-class Person
+----
+
+The `Person` domain class will automatically be a persistent entity that can be stored in Redis.

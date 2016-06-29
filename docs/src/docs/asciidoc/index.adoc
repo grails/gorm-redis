@@ -1,0 +1,71 @@
+= Redis GORM
+Graeme Rocher:version: 6.0.0.BUILD-SNAPSHOT
+:imagesdir: ./images
+:source-highlighter: coderay
+
+[[introduction]]
+== Introduction
+
+include::introduction.adoc[]
+
+[[compatibility]]
+=== Compatibility
+
+include::introduction/compatibility.adoc[]
+
+[[gettingStarted]]
+== Getting Started
+
+include::gettingStarted.adoc[]
+
+[[standalone]]
+=== Using GORM for Redis Standalone
+
+include::gettingStarted/standalone.adoc[]
+
+[[combining]]
+=== Combining Redis and Hibernate
+
+include::gettingStarted/combining.adoc[]
+
+[[mapping]]
+== Object Mapping
+
+include::mapping.adoc[]
+
+[[querying]]
+== Querying
+
+include::querying.adoc[]
+
+[[queryLimitations]]
+=== Query Limitations
+
+include::querying/queryLimitations.adoc[]
+
+[[extensions]]
+== Redis Specific Extensions
+
+include::extensions.adoc[]
+
+[[reference]]
+== Reference
+
+[[ref-domain-classes]]
+=== Domain Classes
+
+[[ref-domain-classes-expire]]
+==== expire
+
+include::ref/Domain Classes/expire.adoc[]
+
+[[ref-domain-classes-pop]]
+==== pop
+
+include::ref/Domain Classes/pop.adoc[]
+
+[[ref-domain-classes-random]]
+==== random
+
+include::ref/Domain Classes/random.adoc[]
+

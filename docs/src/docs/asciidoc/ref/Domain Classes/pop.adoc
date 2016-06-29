@@ -1,0 +1,14 @@
+===== Purpose
+
+Returns and deletes random domain instance.
+
+===== Examples
+
+[source,groovy]
+----
+def randomPerson = Person.pop()
+----
+
+===== Description
+
+Similar to the `random` method but deletes the domain instance at the same time.
