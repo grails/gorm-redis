@@ -297,8 +297,8 @@ class PublishingConvention {
     Project project
 
     String projectArtifactId
-    String projectName = 'GORM for Cassandra'
-    String projectDescription = 'Provides a GORM Object Mapping implementations for the Cassandra Column Database'
+    String projectName = 'GORM for Redis'
+    String projectDescription = 'Provides a GORM Object Mapping for Redis Hashes'
     String projectURL
     String projectIssueTrackerUrl
     String projectVcsUrl
