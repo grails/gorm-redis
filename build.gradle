@@ -86,13 +86,13 @@ subprojects { project ->
 
     if(isPluginProject) {        
         group "org.grails.plugins"
+        version( rootProject.version - '.RELEASE' )
     }
     else {
         group "org.grails"
+        version rootProject.version
     }
     
-
-    version rootProject.version
 
     repositories {
         mavenLocal()
@@ -113,13 +113,6 @@ subprojects { project ->
     if(project.name == 'docs') {
         return
     }   
-
-    if(isPluginProject) {
-        group "org.grails.plugins"
-    }
-    else {
-        group "org.grails"        
-    }
 
     if(isGrails3PluginProject) {
         apply plugin: "org.grails.grails-plugin"       
