@@ -1,5 +1,5 @@
 = Redis GORM
-Graeme Rocher:version: 6.0.0.BUILD-SNAPSHOT
+Graeme Rocher
 :imagesdir: ./images
 :source-highlighter: coderay
 
