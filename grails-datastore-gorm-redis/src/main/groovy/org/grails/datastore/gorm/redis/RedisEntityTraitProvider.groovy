@@ -30,4 +30,12 @@ import org.grails.datastore.mapping.reflect.ClassUtils
 class RedisEntityTraitProvider implements GormEntityTraitProvider {
     final Class entityTrait = RedisEntity
     final boolean available = ClassUtils.isPresent("redis.clients.jedis.Jedis")
+
+    Class getEntityTrait() {
+        return entityTrait
+    }
+
+    boolean isAvailable() {
+        return available
+    }
 }
